@@ -32,6 +32,8 @@ namespace Kvalic
             Filtr.ItemsSource = allTypes;
             Filtr.SelectedIndex = 0;
             Update();
+            //https://drive.google.com/file/d/1gjVQmQ84nSsO8mrMHjl6PBUvD1CoKZEg/view?usp=share_link
+            //https://drive.google.com/drive/u/0/folders/1_6lpl0zTizhgqaUoIEYmcl2czQLM9Eov
         }
         private void Update()
         {
