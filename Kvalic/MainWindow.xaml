@@ -5,72 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Kvalic"
         mc:Ignorable="d"
-        Title="Новые продукты" Height="450" Width="800" Icon="beauty_logo.png">
+        Title="MainWindow" Height="450" Width="800" >
     <Grid >
-        <Grid.Background>
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="White" Offset="0.005"/>
-                <GradientStop Color="White" Offset="1"/>
-            </LinearGradientBrush>
-        </Grid.Background>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="3*"/>
-            <RowDefinition Height="20*"/>
-            <RowDefinition Height="5*"/>
-        </Grid.RowDefinitions>
-        <WrapPanel Grid.Row="0" Grid.ColumnSpan="3" Orientation="Horizontal">
-            <StackPanel Orientation="Horizontal"  Margin="5">
-                <TextBlock Text="Поиск:" Foreground="#FFFF8B04" Margin="5"/>
-                <TextBox x:Name="SearchBox" Text="" Width="100" Margin="5" TextChanged="SearchBox_TextChanged" Background="White" BorderBrush="#FFFF0101"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="5">
-                <TextBlock Text="Выберите производителя:" Foreground="#FFFF8B04" Margin="5" VerticalAlignment="Center"/>
-                <ComboBox Width="150" Height="25" Name="Filtr" SelectionChanged="Filtr_SelectionChanged"  DisplayMemberPath="Name"></ComboBox>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="5">
-                <TextBlock Text="Сортировать по:" Foreground="#FFFF8B04" Margin="5" VerticalAlignment="Center"/>
-                <ComboBox Width="150" Height="25" Name="Sortir" SelectionChanged="Sortir_SelectionChanged"  DisplayMemberPath="Name">
-                    <ComboBoxItem>по умолчанию</ComboBoxItem>
-                    <ComboBoxItem>цене по Возрастанию</ComboBoxItem>
-                    <ComboBoxItem>цене по убыванию</ComboBoxItem>
-                </ComboBox>
-            </StackPanel>
-        </WrapPanel>
-        <ListView Name="ListProduct" Grid.Row="1" Grid.ColumnSpan="3" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Center" Background="White">
-            <ListView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"></WrapPanel>
-                </ItemsPanelTemplate>
-            </ListView.ItemsPanel>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Grid Height="250" Width="300">
-                        <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
-                            <Image Width="100" Height="100" Margin="5"
-                                                Source="{Binding MainImagePath}">
-                            </Image>
-                            <StackPanel Orientation="Horizontal" Margin="5">
-                                <TextBlock Text="{Binding Title}"  TextWrapping="Wrap" VerticalAlignment="Center"  TextAlignment="Center"></TextBlock>
-                                <TextBlock Text="{Binding Count,StringFormat={}({0})}"></TextBlock>
-                            </StackPanel>
-                            <TextBlock Text="{Binding Cost}" TextWrapping="Wrap" VerticalAlignment="Center"  TextAlignment="Center" Margin="5 5"></TextBlock>
-                            <TextBlock Text="{Binding IsActual}" TextWrapping="Wrap" VerticalAlignment="Center"  TextAlignment="Center" Margin="5 5"></TextBlock>
-                            <Button Name="History" Click="History_Click" Content="Заказы"></Button>
-                        </StackPanel>
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        <WrapPanel Grid.Row="2" Grid.ColumnSpan="3" Orientation="Horizontal">
-            <StackPanel Orientation="Horizontal"  Margin="5">
-                <Button Name="Del" Click="Del_Click" Width="100" Height="20" Margin="5" Content="Del"></Button>
-                <Button Name="Add" Click="Add_Click" Width="100" Height="20" Margin="5" Content="Add"></Button>
-            </StackPanel> 
-        </WrapPanel>
+        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"></Frame>
     </Grid>
 </Window>

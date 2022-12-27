@@ -22,72 +22,8 @@ namespace Kvalic
     {
         public MainWindow()
         {
-            InitializeComponent(); 
-            ListProduct.ItemsSource = App.DB.Product.ToList();
-            var allTypes = App.DB.Manufacturer.ToList();
-            allTypes.Insert(0, new Manufacturer
-            {
-                Name = "Все"
-            });
-            Filtr.ItemsSource = allTypes;
-            Filtr.SelectedIndex = 0;
-            Update();
-            //https://drive.google.com/file/d/1gjVQmQ84nSsO8mrMHjl6PBUvD1CoKZEg/view?usp=share_link
-            //https://drive.google.com/drive/u/0/folders/1_6lpl0zTizhgqaUoIEYmcl2czQLM9Eov
-        }
-        private void Update()
-        {
-
-            var product = App.DB.Product.ToList();
-            product = product.Where(p => p.Title.ToString().ToLower().Contains(SearchBox.Text.ToLower())).ToList();
-            if (Filtr.SelectedIndex > 0)
-            {
-                var a = Filtr.SelectedIndex.ToString();
-                product = product.Where(p => p.ManufacturerID.ToString().ToLower().Contains(a.ToLower())).ToList();
-            }
-            if (Sortir.SelectedIndex > 0)
-            {
-                if(Sortir.SelectedIndex==1)
-                {
-                    product = product.OrderBy(x=> x.Cost).ToList();
-                }
-                else if (Sortir.SelectedIndex == 2)
-                {
-                    product = product.OrderByDescending(x => x.Cost).ToList();
-                }
-            }
-            ListProduct.ItemsSource = product.ToList();
-        }
-        private void Filtr_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            Update();
-        }
-
-        private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            Update();
-        }
-
-        private void Sortir_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            Update();
-        }
-
-        private void Add_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void History_Click(object sender, RoutedEventArgs e)
-        {
-            var zakaz = new Zakaz();
-            zakaz.ShowDialog();
-            Update();
-        }
-
-        private void Del_Click(object sender, RoutedEventArgs e)
-        {
-
+            InitializeComponent();
+            MainFrame.Navigate(new ProductList());
         }
     }
 }

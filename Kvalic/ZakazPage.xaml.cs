@@ -10,18 +10,22 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Kvalic
 {
     /// <summary>
-    /// Логика взаимодействия для Zakaz.xaml
+    /// Логика взаимодействия для ZakazPage.xaml
     /// </summary>
-    public partial class Zakaz : Window
+    public partial class ZakazPage : Page
     {
-        public Zakaz()
+        Product contextProduct;
+        public ZakazPage(Product product)
         {
             InitializeComponent();
+            contextProduct = product;
+            DataContext = contextProduct;
             ListZakazov.ItemsSource = App.DB.ProductSale.ToList();
             var allTypes = App.DB.Product.ToList();
             allTypes.Insert(0, new Product
@@ -29,7 +33,7 @@ namespace Kvalic
                 Title = "Все"
             });
             Filtr1.ItemsSource = allTypes;
-            Filtr1.SelectedIndex = 0;
+            Filtr1.SelectedIndex = contextProduct.ID;
             Update();
         }
         private void Update()
@@ -39,7 +43,7 @@ namespace Kvalic
             if (Filtr1.SelectedIndex > 0)
             {
                 var a = Filtr1.SelectedIndex.ToString();
-                product = product.Where(p => p.ProductID.ToString().ToLower().Contains(a.ToLower())).ToList();
+                product = product.Where(p => p.ProductID.ToString().Contains(a)).ToList();
             }
             ListZakazov.ItemsSource = product.OrderByDescending(x => x.SaleDate).ToList();
         }
@@ -56,6 +60,11 @@ namespace Kvalic
         private void Sortir_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Update();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new ProductList());
         }
     }
 }
